@@ -7,7 +7,9 @@ export default async function QuizzesPage() {
 
   return (
     <div className="h-full w-full">
-      <h1 className="text-xl font-bold">Choose Topic</h1>
+      <h1 className="text-xl font-bold">
+        Choose a topic
+      </h1>
 
       <CourseList
         courses={courses}

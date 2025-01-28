@@ -11,6 +11,7 @@ const schema = a.schema({
   Course: a
   .model({
     title: a.string().required(),
+    activeCourse: a.hasOne("ActiveCourse", "courseId"),
     })
   .authorization((allow) => [
     allow.publicApiKey()
@@ -18,6 +19,7 @@ const schema = a.schema({
   UserProfile: a.model({
     email: a.string(),
     profileOwner: a.string(),
+    activeCourse: a.hasOne("ActiveCourse", "userEmail"),
   }).authorization((allow) => [
     allow.ownerDefinedIn("profileOwner"),
   ]),
