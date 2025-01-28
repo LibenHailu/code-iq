@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 import type { Schema } from '@/amplify/data/resource';
 import outputs from '@/amplify_outputs.json';
-import '@aws-amplify/ui-react/styles.css';
+// import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(outputs);
 
