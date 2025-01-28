@@ -27,13 +27,15 @@
     "aws-amplify": "^6.6.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "json-schema-to-ts": "^3.1.1",
     "lucide-react": "^0.474.0",
     "next": "14.2.10",
     "prettier": "^3.4.2",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "ts-algebra": "^2.0.0"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.11.0",
