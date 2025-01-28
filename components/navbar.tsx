@@ -57,16 +57,18 @@ export const Navbar = () => {
 
   if (authStatus === 'configuring') {
     return (
-      <div className="fixed z-50 top-0 px-4 w-full h-14 border-b shadow-sm  flex items-center backdrop-filter backdrop-blur-lg">
-        <Skeleton className="h-9 w-9 md:hidden" />
-        <div className="md:flex hidden items-center space-x-4 ">
-          <Skeleton className="h-9 w-10" />
-          <Skeleton className="h-9 w-16" />
-          <Skeleton className="h-9 w-16" />
-          <Skeleton className="h-9 w-20 " />
-        </div>
-        <div className="ml-auto flex items-center gap-2">
-          <Skeleton className="h-9 w-28" />
+      <div className="fixed z-50 top-0 px-4 w-full  border-b shadow-sm  backdrop-filter backdrop-blur-lg">
+        <div className="max-w-[1308px] flex h-14 items-center mx-auto">
+          <Skeleton className="h-9 w-9 md:hidden" />
+          <div className="md:flex hidden items-center space-x-4 ">
+            <Skeleton className="h-9 w-10" />
+            <Skeleton className="h-9 w-16" />
+            <Skeleton className="h-9 w-16" />
+            <Skeleton className="h-9 w-20 " />
+          </div>
+          <div className="ml-auto flex items-center gap-2">
+            <Skeleton className="h-9 w-28" />
+          </div>
         </div>
       </div>
     );
@@ -82,10 +84,10 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed z-50 top-0 px-4 w-full h-14 border-b shadow-sm  flex items-center backdrop-filter backdrop-blur-lg">
-      <MobileNavbar />
-      <div className="hidden md:flex">
-        <div className="ml-auto flex items-center space-x-4 ">
+    <nav className="fixed z-50 top-0 px-4 w-full border-b shadow-sm  backdrop-filter backdrop-blur-lg">
+      <div className="max-w-[1308px] flex h-14 items-center mx-auto">
+        <MobileNavbar />
+        <div className="hidden md:flex">
           <Logo />
           <nav className="flex items-center space-x-4 lg:space-x-4">
             {routes.map((route) => (
@@ -99,31 +101,31 @@ export const Navbar = () => {
             ))}
           </nav>
         </div>
-      </div>
-      <div className="ml-auto flex items-center gap-2">
-        {isAuthenticated ? (
-          <Button
-            size="sm"
-            variant="outline"
-            className="w-full"
-            onClick={() =>
-              startTransition(async () => {
-                await signOut();
-                router.push('/login');
-              })
-            }
-          >
-            {isPending ? (
-              <Loader2 className="animate-spin w-4 h-4 mx-4" />
-            ) : (
-              <p>Logout</p>
-            )}
-          </Button>
-        ) : (
-          <Button size="sm" variant="outline" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
-        )}
+        <div className="ml-auto flex items-center gap-2">
+          {isAuthenticated ? (
+            <Button
+              size="sm"
+              variant="outline"
+              className="w-full"
+              onClick={() =>
+                startTransition(async () => {
+                  await signOut();
+                  router.push('/login');
+                })
+              }
+            >
+              {isPending ? (
+                <Loader2 className="animate-spin w-4 h-4 mx-4" />
+              ) : (
+                <p>Logout</p>
+              )}
+            </Button>
+          ) : (
+            <Button size="sm" variant="outline" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
+        </div>
       </div>
     </nav>
   );
