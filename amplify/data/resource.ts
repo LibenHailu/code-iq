@@ -21,7 +21,8 @@ const schema = a.schema({
     profileOwner: a.string(),
     activeCourse: a.hasOne("ActiveCourse", "userEmail"),
   }).authorization((allow) => [
-    allow.ownerDefinedIn("profileOwner"),
+    // allow.ownerDefinedIn("profileOwner"),
+    allow.publicApiKey()
   ]),
   ActiveCourse: a.model({
     courseId: a.id(),
@@ -30,7 +31,8 @@ const schema = a.schema({
     user: a.belongsTo("UserProfile", "userEmail"),
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
-    allow.authenticated(),
+    // allow.authenticated(),
+    allow.publicApiKey()
   ]),
   // CourseImage: a
   // .model({
