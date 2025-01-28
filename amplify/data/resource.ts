@@ -7,6 +7,29 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
+  Course: a
+  .model({
+    title: a.string().required(),
+    description: a.string().required(),
+    images: a.hasOne("CourseImage", "courseId"),
+    mainImageS3Key: a.string(),
+    })
+  .authorization((allow) => [
+    allow.authenticated()
+  ]),
+
+  CourseImage: a
+  .model({
+    s3Key: a.string(),
+    alt: a.string(),
+    courseId: a.id(),
+    course: a.belongsTo("Course", "courseId"),
+  })
+  .secondaryIndexes((index) => [index("courseId")])
+  .authorization((allow) => [
+    allow.authenticated(),
+  ]),
+
   Todo: a
     .model({
       content: a.string(),

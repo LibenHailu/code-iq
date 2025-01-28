@@ -1,0 +1,57 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "next/core-web-vitals",
+    // "next/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:sonarjs/recommended-legacy",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+    // "plugin:cypress/recommended"
+  ],
+
+  "globals": {
+    "React": "readonly"
+  },
+  "rules": {
+    "import/no-cycle": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "@typescript-eslint/no-var-requires": ["error"],
+    "no-unused-vars": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.test.{ts,tsx}", "src/testing/**/*.{ts,tsx}"],
+      "globals": {
+        "it": "readonly",
+        "describe": "readonly"
+      },
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ]
+}
