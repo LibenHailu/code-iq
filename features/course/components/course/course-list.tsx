@@ -21,13 +21,19 @@ export const CourseList = ({
   courses,
   activeCourseId,
 }: Props) => {
+  console.log(activeCourseId);
+  console.log(activeCourseId);
+  console.log(activeCourseId);
+  console.log(activeCourseId);
+  console.log(activeCourseId);
+  console.log(activeCourseId);
   // const router = useRouter()
   const [pending, startTransition] = useTransition();
   const { user } = useAuthenticator((context) => [
     context.user,
   ]);
   const onClick = (id: string) => {
-    // if (pending) return
+    if (pending) return;
 
     // if (id === activeCourseId) {
     //     return router.push("/learn")
@@ -35,11 +41,21 @@ export const CourseList = ({
 
     startTransition(() => {
       // add topic to users progress
-      client.models.ActiveCourse.create({
-        userEmail: user.signInDetails?.loginId,
-        courseId: id,
-      });
-      console.log(id);
+      client.models.ActiveCourse.list().then(
+        (courses) => {
+          if (courses.data) {
+            client.models.ActiveCourse.update({
+              id: courses.data[0]?.id as string,
+              courseId: id,
+            });
+          } else {
+            client.models.ActiveCourse.create({
+              userEmail: user.signInDetails?.loginId,
+              courseId: id,
+            });
+          }
+        }
+      );
     });
   };
 

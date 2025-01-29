@@ -21,8 +21,7 @@ const schema = a.schema({
     profileOwner: a.string(),
     activeCourse: a.hasOne("ActiveCourse", "userEmail"),
   }).authorization((allow) => [
-    // allow.ownerDefinedIn("profileOwner"),
-    allow.publicApiKey()
+    allow.ownerDefinedIn("profileOwner"),
   ]),
   ActiveCourse: a.model({
     courseId: a.id(),

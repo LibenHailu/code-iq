@@ -6,7 +6,7 @@ type CourseFromSchema = Schema['Course']['type'];
 
 export type Course = Omit<
   Pick<CourseFromSchema, 'id' | 'title'>,
-  'images'
+  'images' | 'activeCourse'
 > & {
   //   images: CourseImage;
   mainImageS3Key: Nullable<string>;
