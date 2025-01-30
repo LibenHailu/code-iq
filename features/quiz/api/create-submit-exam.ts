@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { generateClient } from 'aws-amplify/api';
-import { useRouter } from 'next/navigation';
 
 import type { Schema } from '@/amplify/data/resource';
 import { useToast } from '@/hooks/use-toast';
@@ -39,11 +38,9 @@ export const createSubmitQuiz = ({
 export const useCreateSubmitQuiz = () => {
   const { toast } = useToast();
   const { resetAnswers } = useQuizStore();
-  const router = useRouter();
   const { mutate: submit, isPending } = useMutation({
     mutationFn: createSubmitQuiz,
     onSuccess: (data) => {
-      router.replace(`/quizzes`);
       resetAnswers();
       toast({
         title: 'Quiz Completed!',
