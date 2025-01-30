@@ -41,7 +41,7 @@ export function CourseCard({
         width={93.33}
       />
 
-      <p className="text-center font-medium mt-3">
+      <p className="text-center mt-3 text-sm font-medium">
         {title}
       </p>
     </div>

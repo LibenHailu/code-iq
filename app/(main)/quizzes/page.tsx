@@ -21,7 +21,7 @@ export default async function QuizzesPage() {
 
   return (
     <div className="h-full w-full">
-      <h1 className="text-xl font-bold">
+      <h1 className="text-lg font-bold">
         Choose a topic
       </h1>
       <CourseList

@@ -311,34 +311,32 @@ export const Quiz = ({ questions }: QuizProps) => {
                 </Button>
               </div>
               {status !== 'none' && (
-                <>
-                  <Card>
-                    <CardHeader>
-                      <p className="text-base font-semibold">
-                        Explanation
-                      </p>
-                      <p>Correct option</p>
-                      <p className="font-semibold">
-                        {
-                          currentQuestion[
-                            currentQuestion.correctAnswer as keyof QuestionType
-                          ]
-                        }
-                      </p>
-                    </CardHeader>
-                    <CardContent>
-                      <ReactMarkdown
-                        remarkPlugins={[
-                          remarkMath,
-                          remarkGfm,
-                        ]}
-                        rehypePlugins={[rehypeKatex]}
-                      >
-                        {currentQuestion.explanation}
-                      </ReactMarkdown>
-                    </CardContent>
-                  </Card>
-                </>
+                <Card>
+                  <CardHeader>
+                    <p className="text-base font-semibold">
+                      Explanation
+                    </p>
+                    <p>Correct option</p>
+                    <p className="font-semibold">
+                      {
+                        currentQuestion[
+                          currentQuestion.correctAnswer as keyof QuestionType
+                        ]
+                      }
+                    </p>
+                  </CardHeader>
+                  <CardContent>
+                    <ReactMarkdown
+                      remarkPlugins={[
+                        remarkMath,
+                        remarkGfm,
+                      ]}
+                      rehypePlugins={[rehypeKatex]}
+                    >
+                      {currentQuestion.explanation}
+                    </ReactMarkdown>
+                  </CardContent>
+                </Card>
               )}
             </div>
           </div>

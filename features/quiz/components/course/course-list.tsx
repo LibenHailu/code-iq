@@ -36,21 +36,25 @@ export const CourseList = ({
 
     startTransition(() => {
       // add topic to users progress
-      client.models.ActiveCourse.list().then(
-        (courses) => {
-          if (courses.data) {
-            client.models.ActiveCourse.update({
-              id: courses.data[0]?.id as string,
-              courseId: id,
-            });
-          } else {
-            client.models.ActiveCourse.create({
-              userEmail: user.signInDetails?.loginId,
-              courseId: id,
-            });
-          }
+      client.models.ActiveCourse.list({
+        filter: {
+          userEmail: {
+            eq: user.signInDetails?.loginId || 'unknown',
+          },
+        },
+      }).then((courses) => {
+        if (courses.data.length > 0) {
+          client.models.ActiveCourse.update({
+            id: courses.data[0]?.id as string,
+            courseId: id,
+          });
+        } else {
+          client.models.ActiveCourse.create({
+            userEmail: user.signInDetails?.loginId,
+            courseId: id,
+          });
         }
-      );
+      });
     });
 
     return router.push(`/quizzes/${id}`);
