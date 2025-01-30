@@ -115,7 +115,7 @@ export const Navbar = () => {
               onClick={() =>
                 startTransition(async () => {
                   await signOut();
-                  router.push('/login');
+                  router.push('/');
                 })
               }
             >
