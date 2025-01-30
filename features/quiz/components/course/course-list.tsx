@@ -36,9 +36,6 @@ export const CourseList = ({
 
     startTransition(() => {
       // add topic to users progress
-      client.models.UserAnswer.list({
-        filter: {},
-      });
       client.models.ActiveCourse.list().then(
         (courses) => {
           if (courses.data) {
