@@ -1,6 +1,7 @@
 'use client';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import {
   useEffect,
   useState,
@@ -42,6 +43,7 @@ export const Quiz = ({ questions }: QuizProps) => {
   ]);
   const { answers, resetAnswers } = useQuizStore();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   const createSubmitQuiz = useCreateSubmitQuiz();
 
@@ -84,11 +86,13 @@ export const Quiz = ({ questions }: QuizProps) => {
   }, []);
 
   const handleSubmit = () => {
-    if (Object.keys(answers).length !== 10) {
-      setOpen(true);
-    } else {
-      const calculatedScore = Object.keys(answers).reduce(
-        (acc, key) => {
+    startTransition(() => {
+      if (Object.keys(answers).length !== 10) {
+        setOpen(true);
+      } else {
+        const calculatedScore = Object.keys(
+          answers
+        ).reduce((acc, key) => {
           return (
             acc +
             (answers[key].correctAnswer ===
@@ -96,22 +100,22 @@ export const Quiz = ({ questions }: QuizProps) => {
               ? 1
               : 0)
           );
-        },
-        0
-      );
+        }, 0);
 
-      try {
-        createSubmitQuiz.submit({
-          data: {
-            userEmail: user.signInDetails
-              ?.loginId as string,
-            score: calculatedScore,
-          },
-        });
-      } catch (error) {
-        console.error(error);
+        try {
+          createSubmitQuiz.submit({
+            data: {
+              userEmail: user.signInDetails
+                ?.loginId as string,
+              score: calculatedScore,
+            },
+          });
+          router.replace('/quizzes');
+        } catch (error) {
+          console.error(error);
+        }
       }
-    }
+    });
   };
 
   const [selectedOption, setSelectedOption] =
@@ -182,6 +186,8 @@ export const Quiz = ({ questions }: QuizProps) => {
           activeIndex={activeIndex}
           questions={questions}
           setOpen={setOpen}
+          startTransition={startTransition}
+          pending={pending}
         />
         <div className="w-full flex-1">
           <div className="flex h-full items-center justify-center">
