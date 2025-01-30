@@ -15,6 +15,7 @@ export default async function QuizzesPage() {
     await cookiesClient.models.ActiveCourse.listActiveCourseByUserEmail(
       {
         userEmail: user?.signInDetails?.loginId,
+        selectionSet: ['courseId'],
       }
     );
 
@@ -23,13 +24,13 @@ export default async function QuizzesPage() {
       <h1 className="text-xl font-bold">
         Choose a topic
       </h1>
-      {JSON.stringify(activeCourse)}
-      {/* <CourseList
+      <CourseList
         courses={courses}
         activeCourseId={
-          activeCourse && activeCourse[0].courseId
+          activeCourse.length > 0 &&
+          activeCourse[0].courseId
         }
-      /> */}
+      />
     </div>
   );
 }
