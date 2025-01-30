@@ -28,7 +28,7 @@ export const useCreateQuizAnswer = () => {
       addAnswer(
         data.data?.questionId as string,
         data.data?.correctAnswer as string,
-        data.data?.userAnswer
+        data.data?.userAnswer as string
       );
     },
     onError: () => {
