@@ -1,5 +1,10 @@
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { Dispatch, SetStateAction } from 'react';
+import { useRouter } from 'next/navigation';
+import {
+  Dispatch,
+  SetStateAction,
+  TransitionStartFunction,
+} from 'react';
 import { useMedia } from 'react-use';
 
 import { Button } from '@/components/ui/button';
@@ -13,12 +18,16 @@ type Props = {
   activeIndex: number;
   questions: Question[];
   setOpen: Dispatch<SetStateAction<boolean>>;
+  startTransition: TransitionStartFunction;
+  pending: boolean;
 };
 
 export const Header = ({
   activeIndex,
   questions,
   setOpen,
+  startTransition,
+  pending,
 }: Props) => {
   const isMobile = useMedia('(max-width: 1024px)');
   const { answers } = useQuizStore();
@@ -26,13 +35,16 @@ export const Header = ({
     context.user,
   ]);
   const createSubmitQuiz = useCreateSubmitQuiz();
+  const router = useRouter();
 
   const handleSubmit = () => {
-    if (Object.keys(answers).length !== 10) {
-      setOpen(true);
-    } else {
-      const calculatedScore = Object.keys(answers).reduce(
-        (acc, key) => {
+    startTransition(() => {
+      if (Object.keys(answers).length !== 10) {
+        setOpen(true);
+      } else {
+        const calculatedScore = Object.keys(
+          answers
+        ).reduce((acc, key) => {
           return (
             acc +
             (answers[key].correctAnswer ===
@@ -40,22 +52,22 @@ export const Header = ({
               ? 1
               : 0)
           );
-        },
-        0
-      );
+        }, 0);
 
-      try {
-        createSubmitQuiz.submit({
-          data: {
-            userEmail: user.signInDetails
-              ?.loginId as string,
-            score: calculatedScore,
-          },
-        });
-      } catch (error) {
-        console.error(error);
+        try {
+          createSubmitQuiz.submit({
+            data: {
+              userEmail: user.signInDetails
+                ?.loginId as string,
+              score: calculatedScore,
+            },
+          });
+          router.replace('/quizzes');
+        } catch (error) {
+          console.error(error);
+        }
       }
-    }
+    });
   };
 
   return (
@@ -73,6 +85,7 @@ export const Header = ({
         variant="outline"
         size={isMobile ? 'sm' : 'lg'}
         onClick={handleSubmit}
+        disabled={pending}
       >
         End Quiz
       </Button>
