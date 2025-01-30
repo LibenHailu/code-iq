@@ -6,13 +6,11 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className=" pt-16 ">
-        <div className="mx-auto flex-1 px-4 flex h-full w-full max-w-[1308px] flex-col ">
-          {children}
-        </div>
-      </main>
-    </>
+      <div className="pt-16 flex-1 mx-auto px-4 w-full max-w-[1308px]">
+        {children}
+      </div>
+    </div>
   );
 }

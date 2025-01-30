@@ -2,6 +2,7 @@
 
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from 'aws-amplify/api';
+import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
 import { Schema } from '@/amplify/data/resource';
@@ -12,7 +13,7 @@ import { CourseCard } from './course-card';
 
 type Props = {
   courses: Course[];
-  activeCourseId?: string; // infer from schema
+  activeCourseId?: string;
 };
 
 const client = generateClient<Schema>();
@@ -21,13 +22,7 @@ export const CourseList = ({
   courses,
   activeCourseId,
 }: Props) => {
-  console.log(activeCourseId);
-  console.log(activeCourseId);
-  console.log(activeCourseId);
-  console.log(activeCourseId);
-  console.log(activeCourseId);
-  console.log(activeCourseId);
-  // const router = useRouter()
+  const router = useRouter();
   const [pending, startTransition] = useTransition();
   const { user } = useAuthenticator((context) => [
     context.user,
@@ -35,9 +30,9 @@ export const CourseList = ({
   const onClick = (id: string) => {
     if (pending) return;
 
-    // if (id === activeCourseId) {
-    //     return router.push("/learn")
-    // }
+    if (id === activeCourseId) {
+      return router.push(`/quizzes/${id}`);
+    }
 
     startTransition(() => {
       // add topic to users progress
@@ -57,6 +52,8 @@ export const CourseList = ({
         }
       );
     });
+
+    return router.push(`/quizzes/${id}`);
   };
 
   return (

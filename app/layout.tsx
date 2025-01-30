@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import ConfigureAmplifyClientSide from '@/components/configure-amplify';
 import { siteConfig } from '@/config/site';
+import { AppProvider } from '@/providers/app';
 
 import './globals.css';
 
@@ -43,7 +44,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ConfigureAmplifyClientSide>
-          {children}
+          <AppProvider>{children}</AppProvider>
         </ConfigureAmplifyClientSide>
       </body>
     </html>

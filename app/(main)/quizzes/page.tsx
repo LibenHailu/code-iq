@@ -1,4 +1,4 @@
-import { CourseList } from '@/features/course';
+import { CourseList } from '@/features/quiz';
 import {
   AuthGetCurrentUserServer,
   cookiesClient,

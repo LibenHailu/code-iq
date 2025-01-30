@@ -46,7 +46,7 @@ export const Navbar = () => {
     {
       href: '/quizzes',
       label: 'Quizzes',
-      active: pathname === `/quizzes`,
+      active: pathname.startsWith('/quizzes'),
     },
     {
       href: '/leaderboard',

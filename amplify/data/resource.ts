@@ -12,6 +12,7 @@ const schema = a.schema({
   .model({
     title: a.string().required(),
     activeCourse: a.hasOne("ActiveCourse", "courseId"),
+    questions: a.hasMany("Question", "courseId"),
     })
   .authorization((allow) => [
     allow.publicApiKey()
@@ -20,6 +21,8 @@ const schema = a.schema({
     email: a.string(),
     profileOwner: a.string(),
     activeCourse: a.hasOne("ActiveCourse", "userEmail"),
+    userAnswer: a.hasMany("UserAnswer", "userEmail"),
+    userScore: a.hasOne("UserScore", "userEmail"),
   }).authorization((allow) => [
     allow.ownerDefinedIn("profileOwner"),
   ]),
@@ -33,6 +36,43 @@ const schema = a.schema({
     // allow.authenticated(),
     allow.publicApiKey()
   ]),
+  Question: a.model({
+    description: a.string(),
+    choiceA: a.string(),
+    choiceB: a.string(),
+    choiceC: a.string(),
+    choiceD: a.string(),
+    correctAnswer: a.string(),
+    explanation: a.string(),
+    userAnswer: a.hasMany("UserAnswer", "questionId"),
+    courseId: a.id(),
+    course: a.belongsTo("Course", "courseId"),
+  }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
+    // allow.authenticated(),
+    allow.publicApiKey()
+  ]),
+  UserAnswer: a.model({
+    correctAnswer: a.string(),
+    userAnswer: a.string(),
+    questionId: a.id(),
+    question: a.belongsTo("Question", "questionId"),
+    userEmail: a.string(),
+    user: a.belongsTo("UserProfile", "userEmail"),
+  }).secondaryIndexes((index) => [index("questionId"), index("userEmail")])
+  .authorization((allow) => [
+    // allow.authenticated(),
+    allow.publicApiKey()
+  ]),
+  UserScore: a.model({
+    userEmail: a.string(),
+    user: a.belongsTo("UserProfile", "userEmail"),
+    score: a.integer(),
+  }).secondaryIndexes((index) => [index("userEmail")])
+  .authorization((allow) => [
+    // allow.authenticated(),
+    allow.publicApiKey()
+  ]),
+  
   // CourseImage: a
   // .model({
   //   s3Key: a.string(),

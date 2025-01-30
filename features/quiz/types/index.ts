@@ -4,6 +4,29 @@ export type Nullable<T> = T | null;
 
 type CourseFromSchema = Schema['Course']['type'];
 
+export type QuestionSchema = Schema['Question']['type'];
+
+export type Question = Pick<
+  QuestionSchema,
+  | 'choiceA'
+  | 'choiceB'
+  | 'choiceC'
+  | 'choiceD'
+  | 'correctAnswer'
+  | 'courseId'
+  | 'description'
+  | 'explanation'
+  | 'id'
+  | 'userAnswer'
+>;
+
+export type CreateQuizAnswer = {
+  questionId?: string;
+  userAnswer?: string;
+  correctAnswer?: string;
+  userEmail?: string;
+};
+
 export type Course = Omit<
   Pick<CourseFromSchema, 'id' | 'title'>,
   'images' | 'activeCourse'
