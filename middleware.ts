@@ -24,12 +24,17 @@ export async function middleware(request: NextRequest) {
     }
   );
 
+  if (!authenticated && !['/leaderboard', '/home'].includes(request.nextUrl.pathname) && !request.nextUrl.pathname.startsWith('/quizzes')) {
+    return response;
+  }
+
+
   if (authenticated) {
     return response;
   }
 
   return NextResponse.redirect(
-    new URL('/login', request.url)
+    new URL('/', request.url)
   );
 }
 
