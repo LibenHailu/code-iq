@@ -37,15 +37,15 @@ const schema = a.schema({
     allow.publicApiKey()
   ]),
   Question: a.model({
-    description: a.string(),
-    choiceA: a.string(),
-    choiceB: a.string(),
-    choiceC: a.string(),
-    choiceD: a.string(),
-    correctAnswer: a.string(),
-    explanation: a.string(),
+    description: a.string().required(),
+    choiceA: a.string().required(),
+    choiceB: a.string().required(),
+    choiceC: a.string().required(),
+    choiceD: a.string().required(),
+    correctAnswer: a.string().required(),
+    explanation: a.string().required(),
     userAnswer: a.hasMany("UserAnswer", "questionId"),
-    courseId: a.id(),
+    courseId: a.id().required(),
     course: a.belongsTo("Course", "courseId"),
   }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
     // allow.authenticated(),

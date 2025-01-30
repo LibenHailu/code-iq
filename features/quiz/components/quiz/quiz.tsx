@@ -321,7 +321,7 @@ export const Quiz = ({ questions }: QuizProps) => {
                       <p className="font-semibold">
                         {
                           currentQuestion[
-                            currentQuestion.correctAnswer as keyof Question
+                            currentQuestion.correctAnswer as keyof QuestionType
                           ]
                         }
                       </p>

@@ -17,7 +17,6 @@ export type Question = Pick<
   | 'description'
   | 'explanation'
   | 'id'
-  | 'userAnswer'
 >;
 
 export type CreateQuizAnswer = {
