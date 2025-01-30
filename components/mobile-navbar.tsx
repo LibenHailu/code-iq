@@ -55,15 +55,15 @@ export const MobileNavbar = () => {
   const routes: RouteObject[] = [
     {
       leading: 'House',
-      href: '/',
+      href: '/home',
       label: 'Home',
-      active: pathname === `/`,
+      active: pathname === `/home`,
     },
     {
       leading: 'FileQuestion',
       href: '/quizzes',
       label: 'Quizzes',
-      active: pathname === `/quizzes`,
+      active: pathname.startsWith(`/quizzes`),
     },
     {
       leading: 'Flame',

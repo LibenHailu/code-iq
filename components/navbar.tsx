@@ -39,9 +39,9 @@ export const Navbar = () => {
 
   const routes = [
     {
-      href: '/',
+      href: '/home',
       label: 'Home',
-      active: pathname === `/`,
+      active: pathname === `/home`,
     },
     {
       href: '/quizzes',

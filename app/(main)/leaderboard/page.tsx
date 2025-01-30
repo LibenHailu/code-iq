@@ -1,9 +1,43 @@
-import { LeaderBoard } from '@/features/leaderboard';
-import { cookiesClient } from '@/utils/amplify-utils';
+import {
+  LeaderBoard,
+  UserScore,
+} from '@/features/leaderboard';
+import {
+  AuthGetCurrentUserServer,
+  cookiesClient,
+} from '@/utils/amplify-utils';
 
-export default function Leaderboard() {
+export default async function Leaderboard() {
+  const user = await AuthGetCurrentUserServer();
   const { data: leaderboard } =
-    cookiesClient.models.UserScore.list();
+    (await cookiesClient.models.UserScore.list({
+      selectionSet: ['userEmail', 'score'],
+    })) as { data: UserScore[] };
 
-  return <LeaderBoard leaderboard={leaderboard} />;
+  leaderboard.sort((a, b) => b.score - a.score);
+  const myScoreIndex = leaderboard.findIndex(
+    (userScore) =>
+      userScore.userEmail === user?.signInDetails?.loginId
+  );
+
+  const myScore =
+    myScoreIndex == -1
+      ? {
+          userEmail:
+            user?.signInDetails?.loginId || 'unknown',
+          score: 0,
+          rank: leaderboard.length,
+        }
+      : {
+          ...leaderboard[myScoreIndex],
+          rank: myScoreIndex,
+        };
+  return (
+    <>
+      <LeaderBoard
+        leaderboard={leaderboard.slice(0, 11)}
+        myScore={myScore}
+      />
+    </>
+  );
 }

@@ -64,9 +64,9 @@ const schema = a.schema({
     allow.publicApiKey()
   ]),
   UserScore: a.model({
-    userEmail: a.string(),
+    userEmail: a.string().required(),
     user: a.belongsTo("UserProfile", "userEmail"),
-    score: a.integer(),
+    score: a.integer().required(),
   }).secondaryIndexes((index) => [index("userEmail")])
   .authorization((allow) => [
     // allow.authenticated(),

@@ -1,38 +1,74 @@
+import Image from 'next/image';
+
+import {
+  Avatar,
+  AvatarImage,
+} from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
+
 import { UserScore } from '../../types';
 
 type LeaderBoardProps = {
   leaderboard: UserScore[];
+  myScore: UserScore & {
+    rank: number;
+  };
 };
 export const LeaderBoard = ({
   leaderboard,
+  myScore,
 }: LeaderBoardProps) => {
   return (
-    <>{JSON.stringify(leaderboard)}</>
-    //     <div className="w-full flex flex-col items-center">
-    //     <Image src="/leaderboard.svg" alt="Leaderboard" height={90} width={90} />
-    //     <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">Leaderboard</h1>
-    //     <p className="text-muted-foreground text-center  text-lg mb-6">
-    //         See where you stand among other learners in the community.
-    //     </p>
-    //     <Separator className="mb-4 h-0.5 rounded-full " />
-    //     {
-    //         leaderboard.map((userProgress, index) => (
-    //             <div
-    //                 key={userProgress.userId}
-    //                 className="flex items-center w-full p-2 px-4 rounded-xl hover:bg-gray-200/50"
-    //             >
-    //                 <p className="font-bold text-lime-700 mr-4">{index + 1}</p>
-    //                 <Avatar className="border bg-green-500 h-12 w-12 ml-3 mr-6">
-    //                     <AvatarImage
-    //                         src={userProgress.userImageSrc}
-    //                         className="object-cover"
-    //                     />
-    //                 </Avatar>
-    //                 <p className="font-bold text-neutral-800 flex-1">{userProgress.userName}</p>
-    //                 <p className="text-muted-foreground">{userProgress.points} XP</p>
-    //             </div>
-    //         ))
-    //     }
-    // </div>
+    <div className="w-full flex flex-col">
+      <div className="flex gap-x-2">
+        <Image
+          src="/leaderboard.svg"
+          alt="Leaderboard"
+          height={40}
+          width={40}
+        />
+        <h1 className="font-bold text-lg my-6">
+          Leaderboard
+        </h1>
+      </div>
+      <Separator className="mb-4 h-0.5 rounded-full " />
+      <div className="flex items-center w-full p-2 px-4 rounded-xl bg-gray-200/50">
+        <p className="font-bold mr-4">
+          {myScore.rank + 1}
+        </p>
+        <Avatar className="sm:block hidden border h-12 w-12 ml-3 mr-6">
+          <AvatarImage
+            src="/logo/logo.svg"
+            className="object-cover"
+          />
+        </Avatar>
+        <p className="font-medium flex-1">
+          {myScore.userEmail}
+        </p>
+        <p className="text-muted-foreground">
+          {myScore.score} Pts
+        </p>
+      </div>
+      {leaderboard.map((userScore, index) => (
+        <div
+          key={userScore.userEmail}
+          className="flex items-center w-full p-2 px-4 rounded-xl hover:bg-gray-200/50"
+        >
+          <p className="font-bold mr-4">{index + 1}</p>
+          <Avatar className="sm:block hidden border h-12 w-12 ml-3 mr-6">
+            <AvatarImage
+              src="/logo/logo.svg"
+              className="object-cover"
+            />
+          </Avatar>
+          <p className="font-medium flex-1">
+            {userScore.userEmail}
+          </p>
+          <p className="text-muted-foreground">
+            {userScore.score} Pts
+          </p>
+        </div>
+      ))}
+    </div>
   );
 };
