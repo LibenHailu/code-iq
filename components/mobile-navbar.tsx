@@ -98,35 +98,37 @@ export const MobileNavbar = () => {
                   <span className="pl-4">Menu</span>
                 </div>
                 <div className="py-4">
-                  <nav className="flex flex-col pl-4 gap-1 md:gap-2 ">
-                    {routes.map((route) => (
-                      <NavBarItem
-                        key={route.href}
-                        href={route.href}
-                        iconName={route.leading}
-                        active={route.active}
-                        label={route.label}
-                        renderNavBarItem={(
-                          props,
-                          state
-                        ) =>
-                          state.isHovered ||
-                          state.active ? (
-                            <NavBarIcon
-                              {...props}
-                              className={cn(
-                                props.className,
-                                'text-primary'
-                              )}
-                              strokeWidth={3}
-                            />
-                          ) : (
-                            <NavBarIcon {...props} />
-                          )
-                        }
-                      />
-                    ))}
-                  </nav>
+                  {isAuthenticated && (
+                    <nav className="flex flex-col pl-4 gap-1 md:gap-2 ">
+                      {routes.map((route) => (
+                        <NavBarItem
+                          key={route.href}
+                          href={route.href}
+                          iconName={route.leading}
+                          active={route.active}
+                          label={route.label}
+                          renderNavBarItem={(
+                            props,
+                            state
+                          ) =>
+                            state.isHovered ||
+                            state.active ? (
+                              <NavBarIcon
+                                {...props}
+                                className={cn(
+                                  props.className,
+                                  'text-primary'
+                                )}
+                                strokeWidth={3}
+                              />
+                            ) : (
+                              <NavBarIcon {...props} />
+                            )
+                          }
+                        />
+                      ))}
+                    </nav>
+                  )}
                 </div>
               </div>
             </SheetContent>

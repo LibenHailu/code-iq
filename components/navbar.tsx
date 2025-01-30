@@ -18,10 +18,9 @@ import { MobileNavbar } from './mobile-navbar';
 import { Skeleton } from './ui/skeleton';
 
 export const Navbar = () => {
-  const { authStatus } = useAuthenticator((context) => [
-    context.authStatus,
-    context.user,
-  ]);
+  const { authStatus, user } = useAuthenticator(
+    (context) => [context.authStatus, context.user]
+  );
 
   const [isAuthenticated, setIsAuthenticated] =
     useState<boolean>(false);
@@ -89,17 +88,23 @@ export const Navbar = () => {
         <MobileNavbar />
         <div className="hidden md:flex">
           <Logo />
-          <nav className="flex items-center space-x-4 lg:space-x-4">
-            {routes.map((route) => (
-              <Link
-                key={route.href}
-                href={route.href}
-                className={getClassName(route.active)}
-              >
-                {route.label}
-              </Link>
-            ))}
-          </nav>
+          {user ? (
+            <nav className="flex items-center space-x-4 lg:space-x-4">
+              {routes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className={getClassName(route.active)}
+                >
+                  {route.label}
+                </Link>
+              ))}
+            </nav>
+          ) : (
+            <p className="text-sm font-medium flex items-center">
+              CodeIQ
+            </p>
+          )}
         </div>
         <div className="ml-auto flex items-center gap-2">
           {isAuthenticated ? (
