@@ -1,7 +1,7 @@
 'use client';
-import { Quiz, useQuestions } from '@/features/quiz';
+import { Loader2 } from 'lucide-react';
 
-import Loading from '../../loading';
+import { Quiz, useQuestions } from '@/features/quiz';
 
 export default function QuizPage({
   params: { courseId },
@@ -18,8 +18,8 @@ export default function QuizPage({
 
   if (isLoading || !data) {
     return (
-      <div className="flex h-full w-full items-center">
-        <Loading />
+      <div className="flex h-[80vh] items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     );
   }
