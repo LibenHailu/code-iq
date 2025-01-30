@@ -1,5 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { postConfirmation } from "../auth/post-confirmation/resource";
+// import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -15,7 +15,8 @@ const schema = a.schema({
     questions: a.hasMany("Question", "courseId"),
     })
   .authorization((allow) => [
-    allow.publicApiKey()
+    allow.authenticated().to(["read"]),
+    allow.group("Admins"),
   ]),
   UserProfile: a.model({
     email: a.string(),
@@ -33,8 +34,8 @@ const schema = a.schema({
     user: a.belongsTo("UserProfile", "userEmail"),
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
-    // allow.authenticated(),
-    allow.publicApiKey()
+    allow.owner(),
+    allow.group("Admins"),
   ]),
   Question: a.model({
     description: a.string().required(),
@@ -48,8 +49,8 @@ const schema = a.schema({
     courseId: a.id().required(),
     course: a.belongsTo("Course", "courseId"),
   }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
-    // allow.authenticated(),
-    allow.publicApiKey()
+    allow.authenticated().to(["read"]),
+    allow.group("Admins"),
   ]),
   UserAnswer: a.model({
     correctAnswer: a.string(),
@@ -60,8 +61,8 @@ const schema = a.schema({
     user: a.belongsTo("UserProfile", "userEmail"),
   }).secondaryIndexes((index) => [index("questionId"), index("userEmail")])
   .authorization((allow) => [
-    // allow.authenticated(),
-    allow.publicApiKey()
+    allow.owner(),
+    allow.group("Admins"),
   ]),
   UserScore: a.model({
     userEmail: a.string().required(),
@@ -69,8 +70,8 @@ const schema = a.schema({
     score: a.integer().required(),
   }).secondaryIndexes((index) => [index("userEmail")])
   .authorization((allow) => [
-    // allow.authenticated(),
-    allow.publicApiKey()
+    allow.owner(),
+    allow.group("Admins"),
   ]),
   
   // CourseImage: a
@@ -85,13 +86,8 @@ const schema = a.schema({
   //   allow.authenticated(),
   // ]),
 
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
 })
-.authorization((allow) => [allow.resource(postConfirmation)]);;
+// .authorization((allow) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 
