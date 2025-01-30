@@ -63,12 +63,13 @@ export default async function Home() {
         <h2 className="text-lg font-medium">
           Topic preview
         </h2>
-        <Button variant="outline">
-          View all
-          <ArrowRight />
+        <Button variant="outline" asChild>
+          <Link href="/quizzes">
+            View all
+            <ArrowRight />
+          </Link>
         </Button>
       </div>
-
       <CourseList courses={courses} />
     </div>
   );
