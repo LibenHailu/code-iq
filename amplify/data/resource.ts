@@ -15,7 +15,7 @@ const schema = a.schema({
     questions: a.hasMany("Question", "courseId"),
     })
   .authorization((allow) => [
-    allow.authenticated().to(["read"]),
+    allow.publicApiKey().to(["read"]),
     // allow.group("Admins"),
   ]),
   UserProfile: a.model({
@@ -35,7 +35,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.authenticated().to(["read"]),
+    allow.publicApiKey().to(["read"]),
     // allow.group("Admins"),
   ]),
   Question: a.model({
@@ -50,7 +50,7 @@ const schema = a.schema({
     courseId: a.id().required(),
     course: a.belongsTo("Course", "courseId"),
   }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
-    allow.authenticated().to(["read"]),
+    allow.publicApiKey().to(["read"]),
     // allow.group("Admins"),
   ]),
   UserAnswer: a.model({
