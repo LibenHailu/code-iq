@@ -27,6 +27,7 @@ export default async function QuizzesPage() {
       <CourseList
         courses={courses}
         activeCourseId={
+          activeCourse &&
           activeCourse.length > 0 &&
           activeCourse[0].courseId
         }

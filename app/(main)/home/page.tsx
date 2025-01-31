@@ -18,8 +18,10 @@ export default async function Home() {
       }
     );
 
-  const { data: courseData } =
-    await activeCourse[0].course();
+  let courseData;
+  if (activeCourse && activeCourse.length > 0) {
+    courseData = await activeCourse[0].course().data;
+  }
 
   const { data: courses } =
     await cookiesClient.models.Course.list({
