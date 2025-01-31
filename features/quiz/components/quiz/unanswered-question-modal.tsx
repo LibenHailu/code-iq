@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuthenticator } from '@aws-amplify/ui-react';
+import { useRouter } from 'next/navigation';
 import {
   Dispatch,
   SetStateAction,
@@ -31,7 +32,6 @@ type Props = {
 };
 export const UnansweredQuestionModal = ({
   startTransition,
-  setActiveIndex,
   open,
   close,
 }: Props) => {
@@ -42,6 +42,7 @@ export const UnansweredQuestionModal = ({
   const createSubmitQuiz = useCreateSubmitQuiz();
   const { answers } = useQuizStore();
   const isMobile = useMedia('(max-width: 1024px)');
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -74,7 +75,7 @@ export const UnansweredQuestionModal = ({
             score: calculatedScore,
           },
         });
-        setActiveIndex(-1);
+        router.replace('/quizzes');
       });
     } catch (error) {
       console.error(error);
