@@ -1,22 +1,13 @@
 'use client';
 import { Loader2 } from 'lucide-react';
-import { useEffect } from 'react';
 
-import {
-  Quiz,
-  useQuestions,
-  useQuizStore,
-} from '@/features/quiz';
+import { Quiz, useQuestions } from '@/features/quiz';
 
 export default function QuizPage({
   params: { courseId },
 }: {
   params: { courseId: string };
 }) {
-  const { resetAnswers } = useQuizStore();
-  useEffect(() => {
-    resetAnswers();
-  }, []);
   const { data, isLoading, error } = useQuestions({
     courseId: courseId,
   });

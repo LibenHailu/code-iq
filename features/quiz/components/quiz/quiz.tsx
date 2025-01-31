@@ -86,7 +86,7 @@ export const Quiz = ({ questions }: QuizProps) => {
 
   const handleSubmit = () => {
     startTransition(() => {
-      if (Object.keys(answers).length !== 10) {
+      if (Object.keys(answers).length < 10) {
         setOpen(true);
       } else {
         const calculatedScore = Object.keys(
