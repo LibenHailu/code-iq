@@ -174,6 +174,7 @@ export const Quiz = ({ questions }: QuizProps) => {
     'rounded-sm bg-primary/90 hover:bg-primary/80';
   return (
     <>
+      {JSON.stringify(answers)}
       <UnansweredQuestionModal
         startTransition={startTransition}
         setActiveIndex={setActiveIndex}
