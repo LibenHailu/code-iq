@@ -35,7 +35,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.publicApiKey().to(["read"]),
+    allow.publicApiKey(),
     // allow.group("Admins"),
   ]),
   Question: a.model({
