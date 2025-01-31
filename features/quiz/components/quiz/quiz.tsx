@@ -41,7 +41,7 @@ export const Quiz = ({ questions }: QuizProps) => {
   const { user } = useAuthenticator((context) => [
     context.user,
   ]);
-  const { answers, resetAnswers } = useQuizStore();
+  const { answers } = useQuizStore();
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -77,7 +77,6 @@ export const Quiz = ({ questions }: QuizProps) => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyEvent);
-    resetAnswers();
     return () =>
       window.removeEventListener(
         'keydown',
