@@ -16,7 +16,7 @@ const schema = a.schema({
     })
   .authorization((allow) => [
     allow.authenticated().to(["read"]),
-    allow.group("Admins"),
+    // allow.group("Admins"),
   ]),
   UserProfile: a.model({
     email: a.string(),
@@ -36,7 +36,7 @@ const schema = a.schema({
   .authorization((allow) => [
     allow.owner(),
     allow.authenticated().to(["read"]),
-    allow.group("Admins"),
+    // allow.group("Admins"),
   ]),
   Question: a.model({
     description: a.string().required(),
@@ -51,7 +51,7 @@ const schema = a.schema({
     course: a.belongsTo("Course", "courseId"),
   }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
     allow.authenticated().to(["read"]),
-    allow.group("Admins"),
+    // allow.group("Admins"),
   ]),
   UserAnswer: a.model({
     correctAnswer: a.string(),
@@ -63,7 +63,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("questionId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.group("Admins"),
+    // allow.group("Admins"),
   ]),
   UserScore: a.model({
     userEmail: a.string().required(),
@@ -72,7 +72,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.group("Admins"),
+    // allow.group("Admins"),
   ]),
   
   // CourseImage: a
