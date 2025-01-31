@@ -35,6 +35,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
+    allow.authenticated().to(["read"]),
     allow.group("Admins"),
   ]),
   Question: a.model({
