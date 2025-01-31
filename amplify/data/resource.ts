@@ -63,6 +63,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("questionId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
+    allow.publicApiKey(),
     // allow.group("Admins"),
   ]),
   UserScore: a.model({
@@ -72,6 +73,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
+    allow.publicApiKey(),
     // allow.group("Admins"),
   ]),
   

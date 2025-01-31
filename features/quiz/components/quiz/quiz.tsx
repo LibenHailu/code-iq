@@ -41,7 +41,7 @@ export const Quiz = ({ questions }: QuizProps) => {
   const { user } = useAuthenticator((context) => [
     context.user,
   ]);
-  const { answers } = useQuizStore();
+  const { answers, resetAnswers } = useQuizStore();
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -76,6 +76,7 @@ export const Quiz = ({ questions }: QuizProps) => {
   }
 
   useEffect(() => {
+    resetAnswers();
     window.addEventListener('keydown', handleKeyEvent);
     return () =>
       window.removeEventListener(
@@ -174,7 +175,6 @@ export const Quiz = ({ questions }: QuizProps) => {
     'rounded-sm bg-primary/90 hover:bg-primary/80';
   return (
     <>
-      {JSON.stringify(answers)}
       <UnansweredQuestionModal
         startTransition={startTransition}
         setActiveIndex={setActiveIndex}
