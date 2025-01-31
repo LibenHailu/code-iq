@@ -61,10 +61,10 @@ export const LeaderBoard = ({
               className="object-cover"
             />
           </Avatar>
-          <p className="font-medium flex-1">
+          <p className="font-medium flex-1 line-clamp-1">
             {userScore.userEmail}
           </p>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground shrink-0">
             {userScore.score} Pts
           </p>
         </div>
