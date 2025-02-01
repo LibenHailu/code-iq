@@ -1,16 +1,16 @@
-## AWS Amplify Next.js (App Router) Starter Template
+# CodeIQ
 
-This repository provides a starter template for creating applications using Next.js (App Router) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+## Overview 
 
-## Overview
-
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+CodeIQ is an interactive web application designed to help Software Engineers enhance their knowledge through quizzes on various topics. Users can select courses, take quizzes, and track their progress on a leaderboard. The application is built using Next.js and integrates with AWS Amplify for authentication and data management.
 
 ## Features
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+- **User Authentication:** Secure login and registration using AWS Amplify.
+- **Course Selection:** Users can choose from a variety of courses.
+- **Interactive Quizzes:** Engaging quizzes with instant feedback.
+- **Leaderboard:** Track scores and compare with other users.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
 
 ## Deploying to AWS
 
