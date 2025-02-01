@@ -2,7 +2,7 @@
 
 ## Overview 
 
-CodeIQ is an interactive web application designed to help Software Engineers enhance their knowledge through quizzes on various topics. Users can select courses, take quizzes, and track their progress on a leaderboard. The application is built using Next.js and integrates with AWS Amplify for authentication and data management.
+CodeIQ is an interactive web application designed to help Software Engineers enhance their knowledge through quizzes on various topics. Users can select courses, take quizzes, and track their progress on a leaderboard. The application is built using Next.js and integrated with AWS Amplify for authentication and data management.
 
 ## Features
 
