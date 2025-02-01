@@ -1,25 +1,41 @@
 # CodeIQ
+![Image](https://github.com/user-attachments/assets/9f6c9d97-180b-47c9-b986-0e4be78d49db)
 
 ## Overview 
 
-CodeIQ is an interactive web application designed to help Software Engineers enhance their knowledge through quizzes on various topics. Users can select courses, take quizzes, and track their progress on a leaderboard. The application is built using Next.js and integrated with AWS Amplify for authentication and data management.
+CodeIQ is an interactive web application designed to help software engineers enhance their knowledge through quizzes on various topics. Users can select courses, take quizzes, and track their progress on a leaderboard. The application is built with Next.js and integrates with AWS Amplify for authentication and data management.
 
 ## Features
 
 - **User Authentication:** Secure login and registration using AWS Amplify.
-- **Course Selection:** Users can choose from a variety of courses.
+- **Course Selection:** Users can choose from various courses.
 - **Interactive Quizzes:** Engaging quizzes with instant feedback.
 - **Leaderboard:** Track scores and compare with other users.
 - **Responsive Design:** Optimized for both desktop and mobile devices.
 
-## Deploying to AWS
+## Installation
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/#deploy-a-fullstack-app-to-aws) of our documentation.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/LibenHailu/code-iq.git
+   ```
+3. Navigate to code-iq directory
+   ```sh
+   cd code-iq
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Configure cloud resources
+   ```sh
+   npx amplify sandbox
+   ```
+5. Run the frontend application 
+   ```sh
+   npm run dev
+   ```
 
-## Security
+## Live project link
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
-
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
+Project Link: https://main.d1v9iiwzsr0ngg.amplifyapp.com/
