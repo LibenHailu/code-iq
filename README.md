@@ -28,7 +28,7 @@ CodeIQ is an interactive web application designed to help software engineers enh
    npm install
    ```
 4. Configure cloud resources
-   ```sh
+   ```js
    npx amplify sandbox
    ```
 5. Run the frontend application 
