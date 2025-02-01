@@ -15,7 +15,7 @@ const schema = a.schema({
     questions: a.hasMany("Question", "courseId"),
     })
   .authorization((allow) => [
-    allow.publicApiKey().to(["read"]),
+    allow.authenticated().to(["read"]),
     // allow.group("Admins"),
   ]),
   UserProfile: a.model({
@@ -35,7 +35,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("courseId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.publicApiKey(),
+    allow.owner(),
     // allow.group("Admins"),
   ]),
   Question: a.model({
@@ -50,7 +50,7 @@ const schema = a.schema({
     courseId: a.id().required(),
     course: a.belongsTo("Course", "courseId"),
   }).secondaryIndexes((index) => [index("courseId")]).authorization((allow) => [
-    allow.publicApiKey().to(["read"]),
+    allow.authenticated().to(["read"]),
     // allow.group("Admins"),
   ]),
   UserAnswer: a.model({
@@ -63,7 +63,6 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("questionId"), index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.publicApiKey(),
     // allow.group("Admins"),
   ]),
   UserScore: a.model({
@@ -73,7 +72,7 @@ const schema = a.schema({
   }).secondaryIndexes((index) => [index("userEmail")])
   .authorization((allow) => [
     allow.owner(),
-    allow.publicApiKey(),
+    allow.authenticated().to(["read"]),
     // allow.group("Admins"),
   ]),
   
