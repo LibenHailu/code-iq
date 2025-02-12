@@ -35,7 +35,9 @@ CodeIQ is an interactive web application designed to help software engineers enh
    ```sh
    npm run dev
    ```
+## Architectural Diagram
 
+![Image](https://github.com/user-attachments/assets/cd01aa77-87d6-4af1-97d5-374f7db30361)
 ## Live project link
 
 Project Link: https://main.d1v9iiwzsr0ngg.amplifyapp.com/
